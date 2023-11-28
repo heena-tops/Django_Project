@@ -1,0 +1,69 @@
+{% extends 'c_dash_header.html' %}
+{% load static %}
+{% block content %}
+{% load mathfilters %}
+
+
+<!-- dashboard inner -->
+               <div class="midde_cont">
+                  <div class="container-fluid">
+                     <div class="row column_title">
+                        <div class="col-md-12">
+                           <div class="page_title">
+                              <h2>Your Order History</h2>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- row -->
+                     <div class="row">
+                        <!-- invoice section -->
+                        <div class="col-md-12">
+                           <div class="white_shd full margin_bottom_30">
+                              
+                              <div class="full">
+                                 <div class="invoice_inner">
+                                    <div class="row">
+                                    
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="full padding_infor_info">
+                                 <div class="table_row">
+                                    <div class="table-responsive">
+                                       <table class="table table-striped">
+                                          <thead>
+                                             <tr>
+                                                <th>Transaction ID</th>
+                                                <th>Order Id</th>
+                                                <th>Date</th>
+                                                <th>Description</th>
+                                                <th>Amount</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             {% for i in trans %}
+                                             <tr>
+                                                <td>{{i.pk}}</td>
+                                                <td>{{i.trans_id}}</td>
+                                                <td>{{i.date}}</td>
+                                                <td>{{i.prod}}{{i.qty}}</td>
+                                                <td>{{i.grand_amount}}</td>
+                                             </tr>
+                                             {% endfor %}
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- row -->
+                     
+                  </div>
+                  <!-- footer -->
+                  
+               </div>
+               <!-- end dashboard inner -->
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">Product Details</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'all_products_customer' %}">Products</a></li>
+                    <li class="breadcrumb-item active" aria-current="#">Product Detail</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Projects Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-bold text-primary">Our Projects</p>
+                <h1 class="display-5 mb-5">Some Of Our Wonderful Projects</h1>
+            </div>
+            
+            <div class="container text-center">
+            <div class="row justify-content-center">
+
+                <div class="col-lg-6">
+
+                    <div class="">
+                        <img class="img-fluid" src="{{prod.p_img.url}}" alt="No Preview Image">
+                        <div class="portfolio-text">
+                            <h4 class="text-white mb-4">Landscaping</h4>
+                            
+                        </div>
+                    </div>
+                    
+                    <p class="mb-4"></p>
+                    <h4>Product Name : {{prod.pname}}</h4>
+                    <h4>Product Price : {{prod.price}}</h4>
+                    <h4>Product Category : {{prod.category.category}}</h4>
+                    
+                    <a class="btn btn-primary py-3 px-4" href="{% url 'add_to_cart' pk=prod.pk %}">Add To cart</a>
+                    
+                    <a class="btn btn-primary py-3 px-4" href="">Buy Now</a>
+                </div>
+                
+            </div>
+
+            
+        </div>
+    </div>
+    <!-- Projects End -->
+        
+{% endblock %}

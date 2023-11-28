@@ -1,0 +1,21 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-end">
+            <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
+                <img class="img-fluid rounded" data-wow-delay="0.1s" src="{{blog.image.url}}" style="height:300px;">
+            </div>
+            <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
+                <h1 class="display-5 mb-4">{{blog.title}}</h1>
+                <p class="mb-4">{{blog.desc}}</p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

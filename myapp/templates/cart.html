@@ -1,0 +1,132 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">My cart</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My cart</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Projects Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            {% if request.session.cart_count %}
+            
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-bold text-primary">Our Projects</p>
+                <h1 class="display-5 mb-5">Some Of Our Wonderful Projects</h1>
+            </div>
+            
+            <div class="container text-center">
+                <div class="row justify-content-center">
+                    {% for i in cart %}
+                    <div class="col-lg-6">
+
+                        <div class="">
+                            <img class="img-fluid" src="{{i.product.p_img.url}}" alt="" style="height:450px;">
+                            <div class="portfolio-text">
+                                <h4 class="text-white mb-4">Landscaping</h4>
+                                
+                            </div>
+                        </div>
+                        <h4>{{i.product.pname}}</h4>                    
+                        <h4>cart's pk : {{i.pk}}</h4>                    
+                        <h4>product's pk : {{i.product.pk}}</h4>
+                        <p class="mb-4">product price : {{i.product.price}}</p>
+
+                        <form action="{% url 'change_qty' pk=i.product.pk %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-outline" style="width: 22rem; padding:30px;">
+                                <input name="qty" value="{{i.qty}}" min=1 max=50 type="number" id="typeNumber" class="form-control" onchange="this.form.submit()" />
+                            </div>
+                        </form>
+
+                        <p class="mb-4">Total price : {{i.total}}</p>
+
+
+                        {% if request.session.cart_flag %}
+                        <a class="btn btn-primary py-3 px-4" href="{% url 'remove_from_cart' pk=i.product.pk %}">Remove From Cart</a>
+                        {% else %}
+                        <a class="btn btn-primary py-3 px-4" href="{% url 'add_to_cart' pk=i.product.pk %}">Add To cart</a>
+                        {% endif %}
+                        
+                    </div>
+
+                    {% endfor %}
+                    
+                </div>
+
+                <h4 style="padding-top: 70px;">Total Payable Amount : {{net_price}}</h4>
+                <button id="rzp-button1">Pay with Razorpay</button>
+                
+            </div>
+
+            {% else %}
+
+            
+
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-bold text-primary" style="color:red;">Ooops...!</p>
+                <h1 class="display-5 mb-5">--No Products in cart</h1>
+            </div>
+
+            {% endif %}
+            
+        </div>
+    </div>
+    <!-- Projects End -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+<script>
+    var options = {
+        "key": "rzp_test_10KmXKgXP1IGLg", // Enter the Key ID generated from the Dashboard
+        "amount": "{{total}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Gardener App",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{cart.razorpay_order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature);
+
+
+            window.location.href=`http://localhost:8000/cart/success?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`
+
+        },
+        "prefill": {
+            "name": "Gardener App Payment System",
+            "email": "gardener.tops@gmail.com",
+            "contact": "9000090000"
+        },
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response){
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+
+
+{% endblock %}

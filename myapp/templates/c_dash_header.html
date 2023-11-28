@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>gardener-Dashboard</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- site icon -->
+      <link rel="icon" href="{% static 'c_dash/images/fevicon.png' %}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'c_dash/css/bootstrap.min.css' %}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{% static 'c_dash/style.css' %}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{% static 'c_dash/css/responsive.css' %}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{% static 'c_dash/css/colors.css' %}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{% static 'c_dash/css/bootstrap-select.css' %}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{% static 'c_dash/css/perfect-scrollbar.css' %}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{% static 'c_dash/css/custom.css' %}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body class="dashboard dashboard_1">
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href="{% url 'c_dash_header' %}"><img class="logo_icon img-responsive" src="{% static 'c_dash/images/logo/logo_icon.png' %}" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="{{user.image.url}}" alt="#" /></div>
+                        <div class="user_info">
+                           <h6>John David</h6>
+                           <p><span class="online_animation"></span> Online</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="sidebar_blog_2">
+                  <h4>General</h4>
+                  <ul class="list-unstyled components">
+                     <li class="active">
+                        <a href="{% url 'c_dash_profile' %}"><i class="fa fa-dashboard yellow_color"></i> <span>Profile Management</span></a>
+                     </li>
+                     <li><a href="{% url 'd_cart' %}"><i class="fa fa-clock-o orange_color"></i> <span>Your Cart</span></a></li>
+                     <li><a href="{% url 'order_history' %}"><i class="fa fa-clock-o orange_color"></i> <span>Order History</span></a></li>
+                     
+                  </ul>
+               </div>
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               <div class="topbar">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <div class="full" style="background-color: white;">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="logo_section">
+                           <a href="{% url 'c_dash_header' %}">
+                              <div style="padding: 10px;"><h3>Gardener</h3></div>
+                           </a>
+                        </div>
+                        <div class="right_topbar">
+                           
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+               <!-- end topbar -->
+
+{% block content %}
+{% endblock %}
+
+
+<!-- jQuery -->
+      <script src="{% static 'c_dash/js/jquery.min.js' %}"></script>
+      <script src="{% static 'c_dash/js/popper.min.js' %}"></script>
+      <script src="{% static 'c_dash/js/bootstrap.min.js' %}"></script>
+      <!-- wow animation -->
+      <script src="{% static 'c_dash/js/animate.js' %}"></script>
+      <!-- select country -->
+      <script src="{% static 'c_dash/js/bootstrap-select.js' %}"></script>
+      <!-- owl carousel -->
+      <script src="{% static 'c_dash/js/owl.carousel.js' %}"></script> 
+      <!-- chart js -->
+      <script src="{% static 'c_dash/js/Chart.min.js' %}"></script>
+      <script src="{% static 'c_dash/js/Chart.bundle.min.js' %}"></script>
+      <script src="{% static 'c_dash/js/utils.js' %}"></script>
+      <script src="{% static 'c_dash/js/analyser.js' %}"></script>
+      <!-- nice scrollbar -->
+      <script src="{% static 'c_dash/js/perfect-scrollbar.min.js' %}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{% static 'c_dash/js/custom.js' %}"></script>
+      <script src="{% static 'c_dash/js/chart_custom_style1.js' %}"></script>
+   </body>
+</html>

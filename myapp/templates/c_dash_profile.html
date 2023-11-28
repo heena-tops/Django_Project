@@ -1,0 +1,58 @@
+{% extends 'c_dash_header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="center verticle_center full_height">
+   <div class="login_section">
+      <div class="logo_login">
+         <div class="center">
+            <h1 style="color:white; font-size: 50px;">{{user.name}}'s Profile</h1>
+         </div>
+      </div>
+      <div class="login_form">
+         <form action="{% url 'c_dash_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+               <div class="field">
+                  <label class="label_field">Name</label>
+                  <input type="text" name="uname" value="{{user.name}}" />
+               </div>
+               <div class="field">
+                  <label class="label_field">Name</label>
+                  <input type="file" name="image"/>
+               </div>
+               <div class="field">
+                  <label class="label_field">User Type</label>
+                  <input type="text" name="utype" value="{{user.usertype}}" readonly/>
+               </div>
+               <div class="field">
+                  <label class="label_field">Email Address</label>
+                  <input type="email" name="uemail" value="{{user.email}}" />
+               </div>
+               <div class="field">
+                  <label class="label_field">Password</label>
+                  <input type="password" name="upswd" value="{{user.pswd}}" />
+               </div>
+               <div class="field">
+                  <label class="label_field">Age</label>
+                  <input type="number" name="uage" value="{{user.age}}" />
+               </div>
+               <div class="field">
+                  <label class="label_field">Contact</label>
+                  <input type="tel" name="ucontact" value="{{user.contact}}" />
+               </div>
+               <div class="field">
+                  <label class="label_field">Address</label>
+                  <textarea name="uaddress">{{user.address}}</textarea>
+               </div>
+               <div class="field margin_0">
+                  <label class="label_field hidden">hidden label</label>
+                  <button class="main_bt">Update Profile</button>
+               </div>
+            </fieldset>
+         </form>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'farmer_header.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">My Products</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="{% url 'farmer_index' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Products</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Projects Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-bold text-primary">Our Products</p>
+                <h1 class="display-5 mb-5">My Products</h1>
+            </div>
+            <div class="row wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-12 text-center">
+                    <ul class="list-inline rounded mb-5" id="portfolio-flters">
+                        <a href="{% url 'products' %}"><li class="mx-2 active" data-filter="*" name="all">All</li></a>
+                        {% for i in cat %}
+                        <a href="{% url 'filter' pk=i.pk %}"><li class="mx-2" data-filter="*" name="all">{{i.category}}</li></a>
+                        {% endfor %}
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 portfolio-container">
+                {% for i in product %}
+                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="portfolio-inner rounded">
+                        <img class="img-fluid" src="{{i.p_img.url}}" alt="No Image" style="height:350px; width: auto;">
+                        <div class="portfolio-text">
+                            <p style="color: red;">{{i.pk}}</p>
+                            <a href="{% url 'product_details' pk=i.pk %}"><h4 class="text-white mb-4">{{i.pname}}</h4></a>
+                            <div class="d-flex">
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="{{i.p_img.url}}" data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-lg-square rounded-circle mx-2" href="{% url 'product_details' pk=i.pk %}"><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Projects End -->
+
+{% endblock %}
